@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('dashboard');
+// Route::get('register', function() {
+//     return redirect(route('register'));
 // });
 
 Route::middleware([
@@ -40,4 +41,13 @@ Route::middleware([
     Route::get('/kyc-upload', function () {
         return view('account.kyc-upload');
     })->name('kyc-upload');
+
+    Route::get('/add-member', function () {
+        return view('member.add');
+    })->name('member.create');
+
+    Route::get('/member', [MemberController::class, 'index'])->name('member.index');
+    Route::post('/member-store', [MemberController::class, 'store'])->name('member.store');
+    Route::post('/member-update', [MemberController::class, 'update'])->name('member.update');
+    Route::get('/member-show/{introducer_key}', [MemberController::class, 'show'])->name('member.show');
 });

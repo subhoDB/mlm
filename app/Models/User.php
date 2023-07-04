@@ -24,9 +24,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'introducer_key',
+        'mobile', 'pan_number', 'date_of_birth', 'gender'
     ];
 
     /**
@@ -58,4 +57,29 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    /**
+     * @return hasMany
+     */
+    public function referrals()
+    {
+        return $this->hasMany(UserReferral::class, 'referral_id', 'id');
+    }
+
+    /**
+     * @return hasMany
+     */
+    public function userReferrals()
+    {
+        return $this->hasMany(UserReferral::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return hasMany
+     */
+    // public function referrals()
+    // {
+    //     return $this->hasMany(UserReferral::class);
+    // }
 }

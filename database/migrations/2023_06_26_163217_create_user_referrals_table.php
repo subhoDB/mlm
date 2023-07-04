@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('user_referrals', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->enum('position',['left', 'right']);
+
+            $table->unsignedBigInteger('parent_id')->index();
+            $table->unsignedBigInteger('referral_id')->index();
+            
             $table->timestamps();
         });
     }
